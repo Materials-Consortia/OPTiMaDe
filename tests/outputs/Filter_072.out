@@ -1,4 +1,4 @@
-Parse tree from tests/cases/Filter_024.inp:
+Parse tree from tests/cases/Filter_072.inp:
 Filter(9999)
   Expression(9999)
     ExpressionClause(9999)
@@ -42,9 +42,9 @@ Filter(9999)
                 Spaces(9999)
                   Space(9999)
                     TOKEN_1(9999): " ", line: 1, col: 17
-Error: in tests/cases/Filter_024.inp: line 1:
-    unexpected token "K", expected one of "<", ">", "=", "!", "I",
+Error: in tests/cases/Filter_072.inp: line 1:
+    unexpected token "L", expected one of "<", ">", "=", "!", "I",
     "C", "S", "E", "M", "N", "H", or ":"
 
-chemical_formula KNOWN
+chemical_formula LIKE "H2 O2"
                  ^
