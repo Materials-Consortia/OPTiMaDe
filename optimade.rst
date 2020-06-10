@@ -203,9 +203,8 @@ An API implementation handles data types and their representations in three diff
   For more info, see section `Responses`_.
 - The underlying database backend(s) from which the implementation serves data.
 
-Hence, entry properties are described in this proposal using
-context-independent types that are assumed to have some form of
-representation in all contexts. They are as follows:
+Hence, entry properties are described in this proposal using context-independent types that are assumed to have some form of representation in all contexts.
+They are as follows:
 
 - Basic types: **string**, **integer**, **float**, **boolean**, **timestamp**.
 - **list**: an ordered collection of items, where all items are of the same type, unless they are unknown.
@@ -215,9 +214,10 @@ representation in all contexts. They are as follows:
 
 An entry property value that is not present in the database is **unknown**.
 This is equivalently expressed by the statement that the value of that entry property is :val:`null`.
-For more information see section `Properties with an unknown value`_
+For more information see section `Properties with an unknown value`_.
 
-The definition of a property of an entry type specifies a type. The value of that property MUST either have a value of that type, or be unknown.
+The definition of a property of an entry type specifies a type.
+The value of that property MUST either have a value of that type, or be unknown.
 
 General API Requirements and Conventions
 ========================================
@@ -441,13 +441,13 @@ Every response SHOULD contain the following fields, and MUST contain at least on
 
     .. code:: jsonc
 
-       {
-	 "id": "dep_chemical_formula_01",
-	 "type": "warning",
-	 "code": "_exmpl_dep_chemical_formula",
-	 "title": "Deprecation Warning",
-	 "detail": "chemical_formula is deprecated, use instead chemical_formula_hill"
-       }
+        {
+          "id": "dep_chemical_formula_01",
+          "type": "warning",
+          "code": "_exmpl_dep_chemical_formula",
+          "title": "Deprecation Warning",
+          "detail": "chemical_formula is deprecated, use instead chemical_formula_hill"
+        }
 
     **Note**: warning :field:`id`\ s MUST NOT be trusted to identify the exceptional situations (i.e., they are not error codes, use instead the field :field:`code` for this.
     Warning :field:`id`\ s can *only* be trusted to be unique in the list of warning resource objects, i.e., together with the :field:`type`.
@@ -460,33 +460,33 @@ Every response SHOULD contain the following fields, and MUST contain at least on
 
     .. code:: jsonc
 
-       {
-	 "meta": {
-	   "query": {
-	     "representation": "/structures/?filter=a=1 AND b=2",
-	   },
-	   "api_version": "1.0.0",
-	   "time_stamp": "2007-04-05T14:30Z",
-	   "data_returned": 10,
-	   "data_available": 10,
-	   "more_data_available": false,
-	   "provider": {
-	     "name": "Example provider",
-	     "description": "Provider used for examples, not to be assigned to a real database",
-	     "prefix": "exmpl",
-	     "homepage": "http://example.com"
-	   },
-	   "implementation": {
-	     "name": "exmpl-optimade",
-	     "version": "0.1.0",
-	     "source_url": "http://git.example.com/exmpl-optimade",
-	     "maintainer": {
-	       "email": "admin@example.com"
-	     }
-	   }
-	 }
-	 // ...
-       }
+        {
+          "meta": {
+            "query": {
+              "representation": "/structures/?filter=a=1 AND b=2",
+            },
+            "api_version": "1.0.0",
+            "time_stamp": "2007-04-05T14:30Z",
+            "data_returned": 10,
+            "data_available": 10,
+            "more_data_available": false,
+            "provider": {
+              "name": "Example provider",
+              "description": "Provider used for examples, not to be assigned to a real database",
+              "prefix": "exmpl",
+              "homepage": "http://example.com"
+            },
+            "implementation": {
+              "name": "exmpl-optimade",
+              "version": "0.1.0",
+              "source_url": "http://git.example.com/exmpl-optimade",
+              "maintainer": {
+                "email": "admin@example.com"
+              }
+            }
+          }
+          // ...
+        }
 
 - **data**: The schema of this value varies by endpoint, it can be either a *single* `JSON API resource object <http://jsonapi.org/format/1.0/#document-resource-objects>`__ or a *list* of JSON API resource objects.
   Every resource object needs the :field:`type` and :field:`id` fields, and its attributes (described in section `API Endpoints`_) need to be in a dictionary corresponding to the :field:`attributes` field.
@@ -553,48 +553,48 @@ An example of a full response:
 
 .. code:: jsonc
 
-     {
-       "links": {
-	 "next": null,
-	 "base_url": {
-	   "href": "http://example.com/optimade",
-	   "meta": {
-	      "_exmpl_db_version": "3.2.1"
-	   }
-	 }
-       },
-       "meta": {
-	 "query": {
-	   "representation": "/structures?filter=a=1 AND b=2"
-	 },
-	 "api_version": "1.0.0",
-	 "time_stamp": "2007-04-05T14:30Z",
-	 "data_returned": 10,
-	 "data_available": 10,
-	 "last_id": "xy10",
-	 "more_data_available": false,
-	 "provider": {
-	   "name": "Example provider",
-	   "description": "Provider used for examples, not to be assigned to a real database",
-	   "prefix": "exmpl",
-	   "homepage": {
-	     "href": "http://example.com",
-	     "meta": {
-	       "_exmpl_title": "This is an example site"
-	     }
-	   },
-	   "index_base_url": "http://example.com/optimade"
-	 },
-	 "response_message": "OK"
-	 // <OPTIONAL implementation- or database-provider-specific metadata, global to the query>
-       },
-       "data": [
-	 // ...
-       ],
-       "included": [
-	 // ...
-       ],
-     }
+    {
+      "links": {
+        "next": null,
+        "base_url": {
+          "href": "http://example.com/optimade",
+          "meta": {
+            "_exmpl_db_version": "3.2.1"
+          }
+        }
+      },
+      "meta": {
+        "query": {
+          "representation": "/structures?filter=a=1 AND b=2"
+        },
+        "api_version": "1.0.0",
+        "time_stamp": "2007-04-05T14:30Z",
+        "data_returned": 10,
+        "data_available": 10,
+        "last_id": "xy10",
+        "more_data_available": false,
+        "provider": {
+          "name": "Example provider",
+          "description": "Provider used for examples, not to be assigned to a real database",
+          "prefix": "exmpl",
+          "homepage": {
+            "href": "http://example.com",
+            "meta": {
+              "_exmpl_title": "This is an example site"
+            }
+          },
+          "index_base_url": "http://example.com/optimade"
+        },
+        "response_message": "OK"
+        // <OPTIONAL implementation- or database-provider-specific metadata, global to the query>
+      },
+      "data": [
+        // ...
+      ],
+      "included": [
+        // ...
+      ],
+    }
 
 HTTP Response Status Codes
 --------------------------
@@ -706,7 +706,7 @@ Example: http://example.com/optimade/v1/structures?page_limit=100
   If an implementation supports sorting for an `entry listing endpoint <Entry Listing Endpoints_>`_, then the :endpoint:`/info/<entries>` endpoint MUST include, for each field name :field:`<fieldname>` in its :field:`data.properties.<fieldname>` response value that can be used for sorting, the key :field:`sortable` with value :field-val:`true`.
   If a field name under an entry listing endpoint supporting sorting cannot be used for sorting, the server MUST either leave out the :field:`sortable` key or set it equal to :field-val:`false` for the specific field name.
   The set of field names, with :field:`sortable` equal to :field-val:`true` are allowed to be used in the "sort fields" list according to its definition in the JSON API 1.0 specification.
-  The field :field:`sortable` is in addition to each property description (and the OPTIONAL field :field:`unit`).
+  The field :field:`sortable` is in addition to each property description and other OPTIONAL fields.
   An example is shown in section `Entry Listing Info Endpoints`_.
 
 - **include**: A server MAY implement the JSON API concept of returning `compound documents <https://jsonapi.org/format/1.0/#document-compound-documents>`__ by utilizing the :query-param:`include` query parameter as specified by `JSON API 1.0 <https://jsonapi.org/format/1.0/#fetching-includes>`__.
@@ -778,32 +778,32 @@ Example:
 
 .. code:: jsonc
 
-     {
-       "data": [
-	 {
-	   "type": "structures",
-	   "id": "example.db:structs:0001",
-	   "attributes": {
-	     "chemical_formula_descriptive": "Es2 O3",
-	     "url": "http://example.db/structs/0001",
-	     "immutable_id": "http://example.db/structs/0001@123",
-	     "last_modified": "2007-04-05T14:30Z"
-	   }
-	 },
-	 {
-	   "type": "structures",
-	   "id": "example.db:structs:1234",
-	   "attributes": {
-	     "chemical_formula_descriptive": "Es2",
-	     "url": "http://example.db/structs/1234",
-	     "immutable_id": "http://example.db/structs/1234@123",
-	     "last_modified": "2007-04-07T12:02Z"
-	   }
-	 }
-	 // ...
-       ]
-       // ...
-     }
+    {
+      "data": [
+        {
+          "type": "structures",
+          "id": "example.db:structs:0001",
+          "attributes": {
+            "chemical_formula_descriptive": "Es2 O3",
+            "url": "http://example.db/structs/0001",
+            "immutable_id": "http://example.db/structs/0001@123",
+            "last_modified": "2007-04-05T14:30Z"
+          }
+        },
+        {
+          "type": "structures",
+          "id": "example.db:structs:1234",
+          "attributes": {
+            "chemical_formula_descriptive": "Es2",
+            "url": "http://example.db/structs/1234",
+            "immutable_id": "http://example.db/structs/1234@123",
+            "last_modified": "2007-04-07T12:02Z"
+          }
+        }
+        // ...
+      ]
+      // ...
+    }
 
 Single Entry Endpoints
 ----------------------
@@ -839,25 +839,25 @@ Example:
 
 .. code:: jsonc
 
-     {
-       "data": {
-	 "type": "structures",
-	 "id": "example.db:structs:1234",
-	 "attributes": {
-	   "chemical_formula_descriptive": "Es2",
-	   "url": "http://example.db/structs/1234",
-	   "immutable_id": "http://example.db/structs/1234@123",
-	   "last_modified": "2007-04-07T12:02Z"
-	 }
-       },
-       "meta": {
-	 "query": {
-	   "representation": "/structures/example.db:structs:1234?"
-	 }
-	 // ...
-       }
-       // ...
-     }
+    {
+      "data": {
+        "type": "structures",
+        "id": "example.db:structs:1234",
+        "attributes": {
+          "chemical_formula_descriptive": "Es2",
+          "url": "http://example.db/structs/1234",
+          "immutable_id": "http://example.db/structs/1234@123",
+          "last_modified": "2007-04-07T12:02Z"
+        }
+      },
+      "meta": {
+        "query": {
+          "representation": "/structures/example.db:structs:1234?"
+        }
+        // ...
+      }
+      // ...
+    }
 
 Info Endpoints
 --------------
@@ -920,84 +920,84 @@ Example:
 
 .. code:: jsonc
 
-     {
-       "data": {
-	 "type": "info",
-	 "id": "/",
-	 "attributes": {
-	   "api_version": "1.0.0",
-	   "available_api_versions": [
-	     {"url": "http://db.example.com/optimade/v0/", "version": "0.9.5"},
-	     {"url": "http://db.example.com/optimade/v0.9/", "version": "0.9.5"},
-	     {"url": "http://db.example.com/optimade/v0.9.2/", "version": "0.9.2"},
-	     {"url": "http://db.example.com/optimade/v0.9.5/", "version": "0.9.5"},
-	     {"url": "http://db.example.com/optimade/v1/", "version": "1.0.0"},
-	     {"url": "http://db.example.com/optimade/v1.0/", "version": "1.0.0"},
-	   ],
-	   "formats": [
-	     "json",
-	     "xml"
-	   ],
-	   "entry_types_by_format": {
-	     "json": [
-	       "structures",
-	       "calculations"
-	     ],
-	     "xml": [
-	       "structures"
-	     ]
-	   },
-	   "available_endpoints": [
-	     "structures",
-	     "calculations",
-	     "info",
-	     "links"
-	   ],
-	   "is_index": false
-	 }
-       }
-       // ...
-     }
+    {
+      "data": {
+        "type": "info",
+        "id": "/",
+        "attributes": {
+          "api_version": "1.0.0",
+          "available_api_versions": [
+            {"url": "http://db.example.com/optimade/v0/", "version": "0.9.5"},
+            {"url": "http://db.example.com/optimade/v0.9/", "version": "0.9.5"},
+            {"url": "http://db.example.com/optimade/v0.9.2/", "version": "0.9.2"},
+            {"url": "http://db.example.com/optimade/v0.9.5/", "version": "0.9.5"},
+            {"url": "http://db.example.com/optimade/v1/", "version": "1.0.0"},
+            {"url": "http://db.example.com/optimade/v1.0/", "version": "1.0.0"},
+          ],
+          "formats": [
+            "json",
+            "xml"
+          ],
+          "entry_types_by_format": {
+            "json": [
+              "structures",
+              "calculations"
+            ],
+            "xml": [
+              "structures"
+            ]
+          },
+          "available_endpoints": [
+            "structures",
+            "calculations",
+            "info",
+            "links"
+          ],
+          "is_index": false
+        }
+      }
+      // ...
+    }
 
 Example for an index meta-database:
 
 .. code:: jsonc
 
-     {
-       "data": {
-	 "type": "info",
-	 "id": "/",
-	 "attributes": {
-	   "api_version": "1.0.0",
-	   "available_api_versions": [
-	     {"url": "http://db.example.com/optimade/v0/", "version": "0.9.5"},
-	     {"url": "http://db.example.com/optimade/v0.9/", "version": "0.9.5"},
-	     {"url": "http://db.example.com/optimade/v0.9.2/", "version": "0.9.2"},
-	     {"url": "http://db.example.com/optimade/v1/", "version": "1.0.0"},
-	     {"url": "http://db.example.com/optimade/v1.0/", "version": "1.0.0"}
-  	   ],
-	   "formats": [
-	     "json",
-	     "xml"
-	   ],
-	   "entry_types_by_format": {
-	     "json": [],
-	     "xml": []
-	   },
-	   "available_endpoints": [
-	     "info",
-	     "links"
-	   ],
-	   "is_index": true
-	 },
-	 "relationships": {
-	   "default": {
-	     "data": { "type": "child", "id": "perovskites" }
-	   }
-	 }
-       }
-       // ...
-     }
+    {
+      "data": {
+        "type": "info",
+        "id": "/",
+        "attributes": {
+          "api_version": "1.0.0",
+          "available_api_versions": [
+            {"url": "http://db.example.com/optimade/v0/", "version": "0.9.5"},
+            {"url": "http://db.example.com/optimade/v0.9/", "version": "0.9.5"},
+            {"url": "http://db.example.com/optimade/v0.9.2/", "version": "0.9.2"},
+            {"url": "http://db.example.com/optimade/v1/", "version": "1.0.0"},
+            {"url": "http://db.example.com/optimade/v1.0/", "version": "1.0.0"}
+            ],
+          "formats": [
+            "json",
+            "xml"
+          ],
+          "entry_types_by_format": {
+            "json": [],
+            "xml": []
+          },
+          "available_endpoints": [
+            "info",
+            "links"
+          ],
+          "is_index": true
+        },
+        "relationships": {
+          "default": {
+            "data": { "type": "child", "id": "perovskites" }
+          }
+        }
+      }
+      // ...
+    }
 
 Entry Listing Info Endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1007,7 +1007,79 @@ The response for these endpoints MUST include the following information in the :
 
 - **description**: Description of the entry.
 - **properties**: A dictionary describing queryable properties for this entry type, where each key is a property name.
-  Each value is a dictionary, with the REQUIRED key :field:`description` and OPTIONAL keys :field:`unit` and :field:`sortable` (see `Entry Listing URL Query Parameters`_ for more information on :field:`sortable`).
+  Each value is a dictionary, with the
+
+  *REQUIRED keys*:
+
+  - :field:`description`: String. A human-readable description of the property.
+
+  *OPTIONAL keys*:
+
+  - :field:`unit`: String. The physical unit symbol in which the property's value is given.
+    It is RECOMMENDED that non-standard units are described in the description for the property.
+  - :field:`sortable`: Boolean. Whether the property can be used for sorting (see `Entry Listing URL Query Parameters`_ for more information on this field).
+  - :field:`type`: Dictionary or string.
+    The type of the property's value.
+    This can be any of the types defined in `Data types`_.
+
+    :field:`type` SHOULD be given as a string if the property's type is either: :val:`string`, :val:`integer`, :val:`float`, :val:`boolean`, :val:`timestamp`, or :val:`unknown`, i.e., a basic type or :val:`unknown`.
+
+    If the property's type is either: :val:`list` or :val:`dictionary`, i.e., a collection type, the value of :field:`type` SHOULD be given as a dictionary with the keys:
+
+    - :field:`type`: String. Either :val:`list` or :val:`dictionary`.
+    - :field:`content`: Dictionary or string. Similar to the :field:`type` one level up.
+
+    :field:`content` reflects the content of the collection type.
+    This can again be a collection type, which will result in the value of :field:`content` being another dictionary with the keys :field:`type` and :field:`content`.
+
+    While there is no limit to the number of layers of collection types in this specification, it is RECOMMENDED that a provider takes care to consider the practical limitations of clients and the practical usability and transparency of heavily layered properties.
+
+    If the :field:`type` is :val:`dictionary`, then :field:`content` MUST be a dictionary, where the keys are the keys of the property's dictionary value, and the values are again either a string with the OPTIMADE data type of the dictionary key's value type or a dictionary with the keys :field:`type` and :field:`content` if the dictionary key's value type is a collection type. The values for :field:`type` and :field:`content` follow the rules outlined above.
+
+    Example with the properties :property:`_exmpl_list_prop` with the human-readable type of "list of list of floats or unknown values", :property:`_exmpl_dict_prop` with the human-readable type of "list of dictionary with keys: :field:`name`: string; :field:`occupation`: list of float", and :property:`_exmpl_entry_version` with the human-readable type of "int":
+
+    .. code:: jsonc
+
+        {
+          "data": {
+            // ...
+            "properties": {
+              "_exmpl_entry_version": {
+                // ...
+                "type": "integer"
+              },
+              "_exmpl_list_prop": {
+                // ...
+                "type": {
+                  "type": "list",
+                  "content": {
+                    "type": "list",
+                    "content": "float"
+                  }
+                }
+              },
+              "_exmpl_dict_prop": {
+                // ...
+                "type": {
+                  "type": "list",
+                  "content": {
+                    "type": "dictionary",
+                    "content": {
+                      "name": "string",
+                      "occupation": {
+                        "type": "list",
+                        "content": "float"
+                      }
+                    }
+                  }
+                }
+              }
+              // ... <more properties>
+            }
+          }
+          // ...
+        }
+
 - **formats**: List of output formats available for this type of entry.
 - **output\_fields\_by\_format**: Dictionary of available output fields for this entry type, where the keys are the values of the :field:`formats` list and the values are the keys of the :field:`properties` dictionary.
 
@@ -1021,12 +1093,20 @@ Example:
         "properties": {
           "nelements": {
             "description": "Number of elements",
-            "sortable": true
+            "sortable": true,
+            "type": "integer"
           },
           "lattice_vectors": {
             "description": "Unit cell lattice vectors",
             "unit": "Å",
-            "sortable": false
+            "sortable": false,
+            "type": {
+              "type": "list",
+              "content": {
+                "type": "list",
+                "content": "float"
+              }
+            }
           }
           // ... <other property descriptions>
         },
@@ -1080,57 +1160,57 @@ Example:
 
 .. code:: jsonc
 
-     {
-       "data": [
-	 {
-	   "type": "parent",
-	   "id": "index",
-	   "attributes": {
-	     "name": "Index",
-	     "description": "Index for example's OPTIMADE databases",
-	     "base_url": "http://example.com/optimade",
-	     "homepage": "http://example.com"
-	   }
-	 },
-	 {
-	   "type": "child",
-	   "id": "cat_zeo",
-	   "attributes": {
-	     "name": "Catalytic Zeolites",
-	     "description": "Zeolites for deNOx catalysis",
-	     "base_url": {
-	       "href": "http://example.com/optimade/denox/zeolites",
-	       "meta": {
-		 "_exmpl_catalyst_group": "denox"
-	       }
-	     },
-	     "homepage": "http://example.com"
-	   }
-	 },
-	 {
-	   "type": "child",
-	   "id": "frameworks",
-	   "attributes": {
-	     "name": "Zeolitic Frameworks",
-	     "description": "",
-	     "base_url": "http://example.com/zeo_frameworks/optimade",
-	     "homepage": "http://example.com"
-	   }
-	 },
-	 {
-	   "type": "provider",
-	   "id": "exmpl",
-	   "attributes": {
-	     "name": "Example provider",
-	     "description": "Provider used for examples, not to be assigned to a real database",
-	     "base_url": "http://example.com/optimade",
-	     "homepage": "http://example.com"
-	   }
-	 }
-	 // ... <other objects>
-       ]
-       // ...
-     }
+    {
+      "data": [
+        {
+          "type": "parent",
+          "id": "index",
+          "attributes": {
+            "name": "Index",
+            "description": "Index for example's OPTIMADE databases",
+            "base_url": "http://example.com/optimade",
+            "homepage": "http://example.com"
+          }
+        },
+        {
+          "type": "child",
+          "id": "cat_zeo",
+          "attributes": {
+            "name": "Catalytic Zeolites",
+            "description": "Zeolites for deNOx catalysis",
+            "base_url": {
+              "href": "http://example.com/optimade/denox/zeolites",
+              "meta": {
+                "_exmpl_catalyst_group": "denox"
+              }
+            },
+            "homepage": "http://example.com"
+          }
+        },
+        {
+          "type": "child",
+          "id": "frameworks",
+          "attributes": {
+            "name": "Zeolitic Frameworks",
+            "description": "",
+            "base_url": "http://example.com/zeo_frameworks/optimade",
+            "homepage": "http://example.com"
+          }
+        },
+        {
+          "type": "provider",
+          "id": "exmpl",
+          "attributes": {
+            "name": "Example provider",
+            "description": "Provider used for examples, not to be assigned to a real database",
+            "base_url": "http://example.com/optimade",
+            "homepage": "http://example.com"
+          }
+        }
+        // ... <other objects>
+      ]
+      // ...
+    }
 
 Parent and Child Objects
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1893,7 +1973,7 @@ species
     - **original\_name**: OPTIONAL. Can be any valid Unicode string, and SHOULD contain (if specified) the name of the species that is used internally in the source database.
 
           Note: With regards to "source database", we refer to the immediate source being queried via the OPTIMADE API implementation.
-	  The main use of this field is for source databases that use species names, containing characters that are not allowed (see description of the list property `species_at_sites`_).
+    The main use of this field is for source databases that use species names, containing characters that are not allowed (see description of the list property `species_at_sites`_).
 
   - For systems that have only species formed by a single chemical symbol, and that have at most one species per chemical symbol, SHOULD use the chemical symbol as species name (e.g., :val:`"Ti"` for titanium, :val:`"O"` for oxygen, etc.)
     However, note that this is OPTIONAL, and client implementations MUST NOT assume that the key corresponds to a chemical symbol, nor assume that if the species name is a valid chemical symbol, that it represents a species with that chemical symbol.
@@ -1960,40 +2040,40 @@ assemblies
 
       .. code:: jsonc
 
-	   {
-	     "cartesian_site_positions": [[0,0,0]],
-	     "species_at_sites": ["SiGe-vac"],
-	     "species": [
-		 {
-		   "name": "SiGe-vac",
-		   "chemical_symbols": ["Si", "Ge", "vacancy"],
-		   "concentration": [0.3, 0.5, 0.2]
-		 }
-	     ]
-	     // ...
-	   }
+          {
+            "cartesian_site_positions": [[0,0,0]],
+            "species_at_sites": ["SiGe-vac"],
+            "species": [
+              {
+                "name": "SiGe-vac",
+                "chemical_symbols": ["Si", "Ge", "vacancy"],
+                "concentration": [0.3, 0.5, 0.2]
+              }
+            ]
+            // ...
+          }
 
 
     - Using multiple species and the assemblies:
 
       .. code:: jsonc
 
-	   {
-	     "cartesian_site_positions": [ [0,0,0], [0,0,0], [0,0,0] ],
-	     "species_at_sites": ["Si", "Ge", "vac"],
-	     "species": {
-	       "Si": { "chemical_symbols": ["Si"], "concentration": [1.0] },
-	       "Ge": { "chemical_symbols": ["Ge"], "concentration": [1.0] },
-	       "vac": { "chemical_symbols": ["vacancy"], "concentration": [1.0] }
-	     },
-	     "assemblies": [
-	       {
-		 "sites_in_groups": [ [0], [1], [2] ],
-		 "group_probabilities": [0.3, 0.5, 0.2]
-	       }
-	     ]
-	     // ...
-	   }
+          {
+            "cartesian_site_positions": [ [0,0,0], [0,0,0], [0,0,0] ],
+            "species_at_sites": ["Si", "Ge", "vac"],
+            "species": {
+              "Si": { "chemical_symbols": ["Si"], "concentration": [1.0] },
+              "Ge": { "chemical_symbols": ["Ge"], "concentration": [1.0] },
+              "vac": { "chemical_symbols": ["vacancy"], "concentration": [1.0] }
+            },
+            "assemblies": [
+              {
+                "sites_in_groups": [ [0], [1], [2] ],
+                "group_probabilities": [0.3, 0.5, 0.2]
+              }
+            ]
+            // ...
+          }
 
   - It is up to the database provider to decide which representation to use, typically depending on the internal format in which the structure is stored.
     However, given a structure identified by a unique ID, the API implementation MUST always provide the same representation for it.
@@ -2002,18 +2082,18 @@ assemblies
 
     .. code:: jsonc
 
-	 {
-	   "assemblies": [
-	     {
-	       "sites_in_groups": [ [0], [1] ],
-	       "group_probabilities": [0.2, 0.8],
-	     },
-	     {
-	       "sites_in_groups": [ [2], [3] ],
-	       "group_probabilities": [0.3, 0.7]
-	     }
-	   ]
-	 }
+        {
+          "assemblies": [
+            {
+              "sites_in_groups": [ [0], [1] ],
+              "group_probabilities": [0.2, 0.8],
+            },
+            {
+              "sites_in_groups": [ [2], [3] ],
+              "group_probabilities": [0.3, 0.7]
+            }
+          ]
+        }
 
     Site 0 is present with a probability of 20 % and site 1 with a probability of 80 %. These two sites are correlated (either site 0 or 1 is present). Similarly, site 2 is present with a probability of 30 % and site 3 with a probability of 70 %.
     These two sites are correlated (either site 2 or 3 is present).
