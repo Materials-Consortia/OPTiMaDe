@@ -66,6 +66,25 @@
 # - test_authors: runs tests on the AUTHORS file (checks order)
 #
 #
+# Targets for build chain dependencies
+######################################
+#
+# - grammatiker_svn_pull: connects the grammatiker submodule
+#   in tests/tools/grammatiker to the grammatiker svn repository
+#   and pulls new revisions, adding them as git commits
+#
+#   Upon running the above, one can update a git repository
+#   with the grammatiker commits, e.g.:
+#     cd tests/tools/grammatiker
+#     git remote add gitrepo <repo>
+#     git push gitrepo master
+#
+#   To alter the commit used by the OPTIMADE build chain:
+#     (cd tests/tools/grammatiker && git checkout <tag or hash>)
+#     git add tests/tools/grammatiker
+#     git commit -m "Update grammatiker submodule to revision <specifier>"
+#     
+#
 # Furthermore, there are some more granular targets specifically for
 # testing the grammar.
 #

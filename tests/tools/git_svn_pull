@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+URL="$1"
+DIR="$2"
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <svn url>"
+    exit 0
+fi
+
+if [ -n "$2" ]; then
+    cd "$2"
+fi
+
+# Saftey to avoid accidentally running git commands in wrong repo
+if [ ! -e .git ]; then
+    echo "Expected .git to exist in directory."
+    exit 1
+fi
+
+git checkout --quiet master
+
+# Make sure the SVN repository is initialized to the right URL
+CONFIG_URL=$(git config --get svn-remote.svn.url || true)
+if [ "$CONFIG_URL" != "$URL" ]; then
+    git svn init "${URL}" -s
+fi
+
+# Fetch all unseen svn commits
+git svn fetch 
+
+# Find last svn revision in master
+OLDREV=$(git svn find-rev "$(git log --max-count 1 --pretty=format:%H)")
+
+# Find last svn revision in the commits fetched from svn
+git checkout --quiet remotes/origin/trunk
+LAST_NEW_COMMIT="$(git log --max-count 1 --pretty=format:%H)"
+LAST_OLD_COMMIT=$(git svn find-rev "r$OLDREV")
+git checkout --quiet master
+
+if [ "$LAST_NEW_COMMIT" == "$LAST_OLD_COMMIT" ]; then
+    echo "No new svn revisions to pull."
+    exit 0
+fi
+
+# Rebase commits that are not already in master onto master
+git rebase --onto master "$LAST_OLD_COMMIT" "$LAST_NEW_COMMIT"
+git branch -f master
+git checkout --quiet master
